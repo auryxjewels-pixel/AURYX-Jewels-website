@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURYX Jewels | Timeless Elegance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-dark: #9A7B2D;
+    --black: #0A0A0A;
+    --black-soft: #111111;
+    --black-card: #1A1A1A;
+    --white: #F5F0E8;
+    --gray: #888888;
+    --gray-light: #CCCCCC;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .nav-logo, .hero-tagline, .section-title { font-family: 'Playfair Display', serif; }
+
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .nav.scrolled { padding: 10px 40px; background: rgba(10,10,10,0.98); }
+  .nav-logo { font-size: 22px; font-weight: 500; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-link {
+    color: var(--gray-light); text-decoration: none; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s;
+    position: relative;
+  }
+  .nav-link:hover { color: var(--gold); }
+  .nav-link::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+    background: var(--gold); transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .nav-link:hover::after { width: 100%; }
+  .cart-btn {
+    position: relative; background: none; border: 1px solid var(--gold);
+    color: var(--gold); padding: 8px 18px; border-radius: 6px;
+    cursor: pointer; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    transition: all 0.2s; font-family: 'Inter', sans-serif;
+  }
+  .cart-btn:hover { background: var(--gold); color: var(--black); }
+  .cart-count {
+    position: absolute; top: -8px; right: -8px;
+    background: var(--gold); color: var(--black); width: 20px; height: 20px;
+    border-radius: 50%; font-size: 11px; display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+  }
+  .mobile-menu-btn { display: none; background: none; border: none; color: var(--gold); font-size: 24px; cursor: pointer; }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    position: relative; overflow: hidden;
+    background: radial-gradient(ellipse at center, #1a1508 0%, #0a0a0a 70%);
+  }
+  .hero-stars {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(2px 2px at 20px 30px, rgba(201,168,76,0.3), transparent),
+                      radial-gradient(2px 2px at 40px 70px, rgba(201,168,76,0.2), transparent),
+                      radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.15), transparent),
+                      radial-gradient(2px 2px at 160px 120px, rgba(201,168,76,0.25), transparent),
+                      radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.1), transparent);
+    background-size: 250px 250px;
+    animation: twinkle 8s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100%{opacity:0.6} 50%{opacity:1} }
+  .hero-content { position: relative; z-index: 2; padding: 0 20px; }
+  .hero-logo-img {
+    width: 320px; max-width: 80vw; margin-bottom: 24px;
+    filter: drop-shadow(0 0 40px rgba(201,168,76,0.3));
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+  }
+  .hero-tagline {
+    font-size: 14px; letter-spacing: 8px; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 40px;
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
+  }
+  .hero-cta {
+    display: inline-block; padding: 14px 48px; border: 1px solid var(--gold);
+    color: var(--gold); text-decoration: none; font-size: 12px;
+    letter-spacing: 4px; text-transform: uppercase; border-radius: 6px;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s both;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--black); box-shadow: 0 0 30px rgba(201,168,76,0.4); }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .scroll-indicator {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: bounce 2s infinite;
+  }
+  .scroll-indicator span { font-size: 10px; letter-spacing: 3px; color: var(--gray); text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%)translateY(0)} 50%{transform:translateX(-50%)translateY(10px)} }
+
+  .section { padding: 100px 40px; max-width: 1400px; margin: 0 auto; }
+  .section-title {
+    font-size: 32px; font-weight: 500; letter-spacing: 4px;
+    text-transform: uppercase; text-align: center; margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .section-subtitle {
+    text-align: center; color: var(--gray); font-size: 14px;
+    letter-spacing: 2px; margin-bottom: 60px;
+  }
+  .divider {
+    width: 60px; height: 1px; background: var(--gold);
+    margin: 0 auto 60px; opacity: 0.5;
+  }
+
+  .filter-tabs {
+    display: flex; justify-content: center; gap: 16px; margin-bottom: 48px; flex-wrap: wrap;
+  }
+  .filter-tab {
+    padding: 10px 28px; background: transparent; border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gray-light); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; border-radius: 6px; transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .filter-tab:hover, .filter-tab.active {
+    border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08);
+  }
+  .products-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+  }
+  .product-card {
+    background: var(--black-card); border-radius: 16px;
+    overflow: hidden; border: 1px solid rgba(201,168,76,0.1);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: pointer;
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(201,168,76,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.1);
+  }
+  .product-img-wrap {
+    position: relative; overflow: hidden; aspect-ratio: 1;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  }
+  .product-img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .product-card:hover .product-img { transform: scale(1.08); }
+  .product-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,10,0.7); display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .product-card:hover .product-overlay { opacity: 1; }
+  .add-cart-btn {
+    padding: 12px 32px; background: var(--gold); color: var(--black); border: none;
+    border-radius: 6px; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; font-weight: 500;
+    transition: all 0.2s; font-family: 'Inter', sans-serif;
+  }
+  .add-cart-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+  .product-info { padding: 24px; }
+  .product-name { font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 6px; letter-spacing: 1px; }
+  .product-category { font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .product-price { font-size: 18px; color: var(--gold-light); font-weight: 500; }
+  .product-price span { font-size: 13px; color: var(--gray); text-decoration: line-through; margin-left: 8px; }
+
+  .tryon-section {
+    background: linear-gradient(180deg, var(--black) 0%, #0f0f0f 50%, var(--black) 100%);
+    border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .tryon-container {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    max-width: 1200px; margin: 0 auto; padding: 80px 40px;
+  }
+  .tryon-visual {
+    position: relative; aspect-ratio: 3/4; background: var(--black-card);
+    border-radius: 16px; border: 1px solid rgba(201,168,76,0.15);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .camera-preview {
+    width: 100%; height: 100%; background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .camera-icon {
+    width: 80px; height: 80px; border: 2px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.4)} 50%{box-shadow:0 0 0 20px rgba(201,168,76,0)} }
+  .camera-icon svg { width: 32px; height: 32px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .camera-text { color: var(--gray); font-size: 14px; letter-spacing: 2px; }
+  .camera-sub { color: var(--gray); font-size: 11px; margin-top: 8px; opacity: 0.6; }
+  .tryon-btn {
+    margin-top: 24px; padding: 12px 36px; background: var(--gold); color: var(--black);
+    border: none; border-radius: 6px; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; font-weight: 500; font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .tryon-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+  .tryon-info h3 { font-size: 28px; color: var(--gold); margin-bottom: 16px; letter-spacing: 3px; }
+  .tryon-info p { color: var(--gray-light); line-height: 1.8; margin-bottom: 24px; font-size: 15px; }
+  .tryon-features { display: flex; flex-direction: column; gap: 16px; }
+  .tryon-feature {
+    display: flex; align-items: center; gap: 16px; padding: 16px;
+    background: rgba(201,168,76,0.05); border-radius: 10px;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+  .tryon-feature-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(201,168,76,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tryon-feature-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .tryon-feature-text h4 { color: var(--white); font-size: 14px; margin-bottom: 4px; }
+  .tryon-feature-text p { color: var(--gray); font-size: 12px; margin: 0; }
+
+  .about-content {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .about-text h3 { font-size: 24px; color: var(--gold); margin-bottom: 20px; letter-spacing: 2px; }
+  .about-text p { color: var(--gray-light); line-height: 2; margin-bottom: 20px; font-size: 15px; }
+  .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .stat-item { text-align: center; padding: 24px; background: var(--black-card); border-radius: 10px; border: 1px solid rgba(201,168,76,0.1); }
+  .stat-number { font-size: 32px; color: var(--gold); font-weight: 500; margin-bottom: 8px; }
+  .stat-label { font-size: 11px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
+  .about-image {
+    position: relative; border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .about-image img { width: 100%; display: block; }
+
+  .testimonials-slider {
+    position: relative; max-width: 800px; margin: 0 auto; overflow: hidden;
+  }
+  .testimonials-track {
+    display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .testimonial-card {
+    min-width: 100%; padding: 40px;
+    background: var(--black-card); border-radius: 16px;
+    border: 1px solid rgba(201,168,76,0.1); text-align: center;
+  }
+  .testimonial-stars { display: flex; justify-content: center; gap: 6px; margin-bottom: 24px; }
+  .testimonial-stars svg { width: 20px; height: 20px; fill: var(--gold); }
+  .testimonial-stars svg.empty { fill: rgba(201,168,76,0.2); }
+  .testimonial-text { font-size: 18px; color: var(--gray-light); line-height: 1.8; font-style: italic; margin-bottom: 24px; }
+  .testimonial-author { color: var(--gold); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; }
+  .testimonial-location { color: var(--gray); font-size: 12px; margin-top: 6px; }
+  .slider-dots { display: flex; justify-content: center; gap: 12px; margin-top: 32px; }
+  .slider-dot {
+    width: 10px; height: 10px; border-radius: 50%; background: rgba(201,168,76,0.2);
+    border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .slider-dot.active { background: var(--gold); transform: scale(1.3); }
+
+  .customer-photos-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px; max-width: 1000px; margin: 0 auto;
+  }
+  .customer-photo {
+    aspect-ratio: 1; border-radius: 10px; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.1); position: relative; cursor: pointer;
+    background: var(--black-card); display: flex; align-items: center; justify-content: center;
+  }
+  .customer-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+  .customer-photo:hover img { transform: scale(1.1); }
+  .customer-photo-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .customer-photo:hover .customer-photo-overlay { opacity: 1; }
+  .customer-name { color: var(--white); font-size: 12px; }
+  .upload-area {
+    border: 2px dashed rgba(201,168,76,0.3); border-radius: 16px;
+    padding: 48px; text-align: center; cursor: pointer; transition: all 0.2s;
+    margin-top: 40px; max-width: 600px; margin-left: auto; margin-right: auto;
+  }
+  .upload-area:hover { border-color: var(--gold); background: rgba(201,168,76,0.03); }
+  .upload-area svg { width: 40px; height: 40px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 16px; }
+  .upload-area p { color: var(--gray); font-size: 14px; }
+
+  .feedback-form {
+    max-width: 600px; margin: 0 auto; background: var(--black-card);
+    padding: 48px; border-radius: 16px;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+  .form-group { margin-bottom: 24px; }
+  .form-group label { display: block; color: var(--gray-light); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 14px 18px; background: var(--black-soft);
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 10px;
+    color: var(--white); font-size: 14px; font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    outline: none; border-color: var(--gold);
+  }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .star-rating-input { display: flex; gap: 8px; }
+  .star-rating-input svg { width: 28px; height: 28px; cursor: pointer; fill: rgba(201,168,76,0.2); transition: fill 0.2s; }
+  .star-rating-input svg.filled { fill: var(--gold); }
+  .star-rating-input svg:hover { fill: var(--gold-light); }
+  .submit-btn {
+    width: 100%; padding: 16px; background: var(--gold); color: var(--black);
+    border: none; border-radius: 6px; font-size: 13px; letter-spacing: 3px;
+    text-transform: uppercase; cursor: pointer; font-weight: 500; font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .submit-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto;
+  }
+  .contact-info h3 { font-size: 24px; color: var(--gold); margin-bottom: 24px; letter-spacing: 2px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 50%; background: rgba(201,168,76,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .contact-detail h4 { color: var(--white); font-size: 14px; margin-bottom: 4px; }
+  .contact-detail p { color: var(--gray); font-size: 13px; margin: 0; }
+
+  .cart-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7); z-index: 2000; opacity: 0; pointer-events: none;
+    transition: opacity 0.35s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+  .cart-sidebar {
+    position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 90vw;
+    background: var(--black-soft); border-left: 1px solid rgba(201,168,76,0.15);
+    z-index: 2001; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex; flex-direction: column;
+  }
+  .cart-sidebar.open { transform: translateX(0); }
+  .cart-header {
+    padding: 24px; border-bottom: 1px solid rgba(201,168,76,0.1);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cart-header h3 { font-size: 18px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+  .cart-close { background: none; border: none; color: var(--gray); font-size: 24px; cursor: pointer; }
+  .cart-items { flex: 1; overflow-y: auto; padding: 24px; }
+  .cart-empty { text-align: center; padding: 60px 20px; color: var(--gray); }
+  .cart-empty svg { width: 60px; height: 60px; stroke: var(--gold); fill: none; stroke-width: 1; margin-bottom: 16px; opacity: 0.3; }
+  .cart-item {
+    display: flex; gap: 16px; padding: 16px; background: var(--black-card);
+    border-radius: 10px; margin-bottom: 12px; border: 1px solid rgba(201,168,76,0.1);
+  }
+  .cart-item-img { width: 70px; height: 70px; border-radius: 6px; object-fit: cover; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { color: var(--white); font-size: 14px; margin-bottom: 4px; }
+  .cart-item-price { color: var(--gold); font-size: 14px; }
+  .cart-item-remove {
+    background: none; border: none; color: var(--gray); cursor: pointer; font-size: 18px;
+    align-self: flex-start; transition: color 0.2s;
+  }
+  .cart-item-remove:hover { color: #ff4444; }
+  .cart-footer {
+    padding: 24px; border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .cart-total { display: flex; justify-content: space-between; margin-bottom: 20px; }
+  .cart-total span { color: var(--gray); font-size: 14px; }
+  .cart-total strong { color: var(--gold); font-size: 20px; }
+  .checkout-btn {
+    width: 100%; padding: 16px; background: var(--gold); color: var(--black);
+    border: none; border-radius: 6px; font-size: 13px; letter-spacing: 3px;
+    text-transform: uppercase; cursor: pointer; font-weight: 500; font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .checkout-btn:hover { background: var(--gold-light); }
+  .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .payment-modal {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85); z-index: 3000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.35s;
+  }
+  .payment-modal.open { opacity: 1; pointer-events: all; }
+  .payment-content {
+    background: var(--black-soft); border-radius: 16px;
+    border: 1px solid rgba(201,168,76,0.2); padding: 48px; max-width: 480px; width: 90%;
+    text-align: center;
+  }
+  .payment-content h3 { font-size: 22px; color: var(--gold); margin-bottom: 16px; letter-spacing: 2px; }
+  .payment-content p { color: var(--gray); margin-bottom: 32px; line-height: 1.6; }
+  .payment-methods { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; }
+  .payment-method {
+    padding: 16px 24px; background: var(--black-card); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px; cursor: pointer; transition: all 0.2s;
+    color: var(--gray-light); font-size: 13px;
+  }
+  .payment-method:hover, .payment-method.selected { border-color: var(--gold); background: rgba(201,168,76,0.05); color: var(--gold); }
+  .payment-actions { display: flex; gap: 12px; }
+  .payment-actions button { flex: 1; padding: 14px; border-radius: 6px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+  .pay-confirm { background: var(--gold); color: var(--black); border: none; font-weight: 500; }
+  .pay-confirm:hover { background: var(--gold-light); }
+  .pay-cancel { background: transparent; color: var(--gray); border: 1px solid rgba(201,168,76,0.2); }
+  .pay-cancel:hover { border-color: var(--gold); color: var(--gold); }
+
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--black-card); border: 1px solid var(--gold); color: var(--gold);
+    padding: 16px 32px; border-radius: 10px; font-size: 13px; letter-spacing: 1px;
+    z-index: 4000; opacity: 0; transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 2; }
+
+  .footer {
+    background: var(--black-soft); border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 60px 40px 30px; text-align: center;
+  }
+  .footer-logo { font-size: 20px; letter-spacing: 6px; color: var(--gold); margin-bottom: 24px; }
+  .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 32px; flex-wrap: wrap; }
+  .footer-links a { color: var(--gray); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { color: var(--gray); font-size: 12px; opacity: 0.6; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    .tryon-container, .about-content, .contact-grid { grid-template-columns: 1fr; }
+    .section { padding: 60px 20px; }
+    .hero-logo-img { width: 240px; }
+    .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" id="navbar">
+  <div class="nav-logo">AURYX</div>
+  <div class="nav-links">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#collection" class="nav-link">Collection</a>
+    <a href="#tryon" class="nav-link">Try On</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#testimonials" class="nav-link">Reviews</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <button class="cart-btn" onclick="toggleCart()">
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()">&#9776;</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-stars"></div>
+  <div class="hero-content">
+    <svg class="hero-logo-img" viewBox="0 0 400 200" style="max-width:80vw;">
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#E8D5A3"/>
+          <stop offset="50%" style="stop-color:#C9A84C"/>
+          <stop offset="100%" style="stop-color:#9A7B2D"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <text x="200" y="90" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="400" fill="url(#goldGrad)" letter-spacing="12" filter="url(#glow)">AURYX</text>
+      <line x1="120" y1="115" x2="170" y2="115" stroke="#C9A84C" stroke-width="0.5" opacity="0.6"/>
+      <text x="200" y="118" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#C9A84C" letter-spacing="8" opacity="0.9">JEWEL</text>
+      <line x1="230" y1="115" x2="280" y2="115" stroke="#C9A84C" stroke-width="0.5" opacity="0.6"/>
+      <text x="200" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#888" letter-spacing="4" text-transform="uppercase">TIMELESS ELEGANCE. MADE TO BE REMEMBERED.</text>
+      <text x="200" y="170" text-anchor="middle" font-size="16" fill="#C9A84C" opacity="0.8">&#10022;</text>
+    </svg>
+    <p class="hero-tagline">Timeless elegance. Made to be remembered.</p>
+    <a href="#collection" class="hero-cta">Explore Collection</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Product Collection -->
+<section class="section" id="collection">
+  <h2 class="section-title">The Collection</h2>
+  <p class="section-subtitle">Curated pieces for the modern muse</p>
+  <div class="divider"></div>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterProducts('all')">All</button>
+    <button class="filter-tab" onclick="filterProducts('earrings')">Earrings</button>
+    <button class="filter-tab" onclick="filterProducts('necklaces')">Necklaces</button>
+    <button class="filter-tab" onclick="filterProducts('bracelets')">Bracelets</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- Virtual Try On -->
+<section class="tryon-section" id="tryon">
+  <div class="tryon-container">
+    <div class="tryon-visual">
+      <div class="camera-preview" id="cameraPreview">
+        <div class="camera-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="#C9A84C" fill="none" stroke-width="1.5"/><circle cx="12" cy="13" r="4" stroke="#C9A84C" fill="none" stroke-width="1.5"/></svg>
+        </div>
+        <p class="camera-text">Virtual Try-On Experience</p>
+        <p class="camera-sub">Use your camera to see how our jewels look on you</p>
+        <button class="tryon-btn" onclick="startTryOn()">Enable Camera</button>
+      </div>
+    </div>
+    <div class="tryon-info">
+      <h3>Try Before You Buy</h3>
+      <p>Experience our collection like never before. Our virtual try-on feature uses advanced AR technology to let you see how each piece complements your unique style all from the comfort of your home.</p>
+      <div class="tryon-features">
+        <div class="tryon-feature">
+          <div class="tryon-feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" fill="none" stroke-width="1.5"/></svg>
+          </div>
+          <div class="tryon-feature-text">
+            <h4>Premium Materials</h4>
+            <p>Stainless steel and gold-plated finishes</p>
+          </div>
+        </div>
+        <div class="tryon-feature">
+          <div class="tryon-feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="#C9A84C" fill="none" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="#C9A84C" fill="none" stroke-width="1.5"/></svg>
+          </div>
+          <div class="tryon-feature-text">
+            <h4>Timeless Design</h4>
+            <p>Classic elegance for every occasion</p>
+          </div>
+        </div>
+        <div class="tryon-feature">
+          <div class="tryon-feature-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#C9A84C" fill="none" stroke-width="1.5"/></svg>
+          </div>
+          <div class="tryon-feature-text">
+            <h4>Made with Love</h4>
+            <p>Handcrafted attention to every detail</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <h2 class="section-title">Our Story</h2>
+  <p class="section-subtitle">Where passion meets craftsmanship</p>
+  <div class="divider"></div>
+  <div class="about-content">
+    <div class="about-text">
+      <h3>Crafted for the Modern Era</h3>
+      <p>AURYX Jewels was born from a simple belief: luxury should be accessible. We combine timeless design principles with modern craftsmanship to create imitation jewelry that does not just look expensive it feels extraordinary.</p>
+      <p>Every piece in our collection is meticulously designed using premium stainless steel and gold-plated finishes, ensuring durability without compromising on elegance. From delicate earrings to statement bracelets, each creation tells a story of sophistication.</p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Unique Designs</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.9</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image" style="background:linear-gradient(135deg,#1a1a1a,#0d0d0d);min-height:400px;display:flex;align-items:center;justify-content:center;border-radius:16px;">
+      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials">
+  <h2 class="section-title">Client Love</h2>
+  <p class="section-subtitle">What our customers say about us</p>
+  <div class="divider"></div>
+  <div class="testimonials-slider">
+    <div class="testimonials-track" id="testimonialsTrack">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+        </div>
+        <p class="testimonial-text">"The quality exceeded my expectations. The gold-plated bracelet looks absolutely stunning and I have received so many compliments. AURYX has become my go-to for elegant accessories."</p>
+        <p class="testimonial-author">Priya Sharma</p>
+        <p class="testimonial-location">Mumbai, India</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+        </div>
+        <p class="testimonial-text">"I was skeptical about imitation jewelry, but AURYX changed my mind completely. The butterfly bracelet is gorgeous and the packaging felt so premium. Highly recommend!"</p>
+        <p class="testimonial-author">Ananya Patel</p>
+        <p class="testimonial-location">Delhi, India</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#C9A84C"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="rgba(201,168,76,0.2)"/></svg>
+        </div>
+        <p class="testimonial-text">"The heart pendant necklace is my everyday piece now. It has not tarnished after months of wear and the sparkle is just beautiful. Great value for money!"</p>
+        <p class="testimonial-author">Riya Kapoor</p>
+        <p class="testimonial-location">Bangalore, India</p>
+      </div>
+    </div>
+    <div class="slider-dots">
+      <button class="slider-dot active" onclick="goToSlide(0)"></button>
+      <button class="slider-dot" onclick="goToSlide(1)"></button>
+      <button class="slider-dot" onclick="goToSlide(2)"></button>
+    </div>
+  </div>
+</section>
+
+<!-- Customer Photos -->
+<section class="section" id="customer-photos">
+  <h2 class="section-title">Customer Gallery</h2>
+  <p class="section-subtitle">Real people, real elegance</p>
+  <div class="divider"></div>
+  <div class="customer-photos-grid" id="customerPhotosGrid">
+    <div class="customer-photo" style="background:linear-gradient(135deg,#1a1a1a,#0d0d0d);">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="customer-photo" style="background:linear-gradient(135deg,#1a1a1a,#0d0d0d);">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="customer-photo" style="background:linear-gradient(135deg,#1a1a1a,#0d0d0d);">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="customer-photo" style="background:linear-gradient(135deg,#1a1a1a,#0d0d0d);">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+  </div>
+  <div class="upload-area" onclick="uploadCustomerPhoto()">
+    <svg viewBox="0 0 24 24" width="40" height="40" stroke="#C9A84C" fill="none" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    <p>Share your AURYX moment with us</p>
+    <p style="font-size:12px;color:var(--gray);margin-top:8px;">Click to upload your photo</p>
+  </div>
+</section>
+
+<!-- Feedback -->
+<section class="section" id="feedback">
+  <h2 class="section-title">Share Your Experience</h2>
+  <p class="section-subtitle">Your feedback helps us shine brighter</p>
+  <div class="divider"></div>
+  <form class="feedback-form" onsubmit="submitFeedback(event)">
+    <div class="form-group">
+      <label>Your Rating</label>
+      <div class="star-rating-input" id="starRating">
+        <svg viewBox="0 0 24 24" width="28" height="28" onclick="setRating(1)" data-rating="1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" width="28" height="28" onclick="setRating(2)" data-rating="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" width="28" height="28" onclick="setRating(3)" data-rating="3"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" width="28" height="28" onclick="setRating(4)" data-rating="4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" width="28" height="28" onclick="setRating(5)" data-rating="5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" placeholder="Enter your name" required>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" placeholder="your@email.com" required>
+    </div>
+    <div class="form-group">
+      <label>Your Review</label>
+      <textarea placeholder="Tell us about your experience..." required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Submit Review</button>
+  </form>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+  <h2 class="section-title">Get in Touch</h2>
+  <p class="section-subtitle">We would love to hear from you</p>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Contact Information</h3>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="#C9A84C" fill="none" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-detail">
+          <h4>Email</h4>
+          <p>hello@auryxjewels.com</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="#C9A84C" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.87 12.87 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.87 12.87 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="contact-detail">
+          <h4>Phone</h4>
+          <p>+91 98765 43210</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="#C9A84C" fill="none" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="contact-detail">
+          <h4>Location</h4>
+          <p>Mumbai, Maharashtra, India</p>
+        </div>
+      </div>
+    </div>
+    <form class="feedback-form" onsubmit="submitContact(event)">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select>
+          <option>General Inquiry</option>
+          <option>Order Status</option>
+          <option>Custom Order</option>
+          <option>Wholesale</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="How can we help you?" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-logo">AURYX JEWELS</div>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#collection">Collection</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 AURYX Jewels. Timeless elegance. Made to be remembered.</p>
+</footer>
+
+<!-- Cart Sidebar -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart()">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <svg viewBox="0 0 24 24" width="60" height="60" stroke="#C9A84C" fill="none" stroke-width="1" style="opacity:0.3;margin-bottom:16px;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Your cart is empty</p>
+      <p style="font-size:12px;color:var(--gray);margin-top:8px;">Add some sparkle to your life</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">&#8377;0</strong>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openPayment()" disabled>Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="payment-modal" id="paymentModal">
+  <div class="payment-content">
+    <h3>Complete Your Order</h3>
+    <p>Choose your preferred payment method to finalize your purchase securely.</p>
+    <div class="payment-methods">
+      <div class="payment-method" onclick="selectPayment(this)">UPI</div>
+      <div class="payment-method" onclick="selectPayment(this)">Card</div>
+      <div class="payment-method" onclick="selectPayment(this)">COD</div>
+    </div>
+    <div class="payment-actions">
+      <button class="pay-confirm" onclick="processPayment()">Pay Now</button>
+      <button class="pay-cancel" onclick="closePayment()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" width="20" height="20" stroke="#C9A84C" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastMsg">Item added to cart</span>
+</div>
+
+<script>
+// Product Data
+const products = [
+  { id: 1, name: "Stellar Hoop Set", category: "earrings", price: 899, oldPrice: 1299, image: "products/hoops.jpg" },
+  { id: 2, name: "Butterfly Stud Trio", category: "earrings", price: 649, oldPrice: 999, image: "products/studs.jpg" },
+  { id: 3, name: "Cartier-Inspired Bangle", category: "bracelets", price: 1499, oldPrice: 2199, image: "products/bangle.jpg" },
+  { id: 4, name: "Eternal Heart Pendant", category: "necklaces", price: 799, oldPrice: 1199, image: "products/heart-pendant.jpg" },
+  { id: 5, name: "Golden Heart Chain", category: "necklaces", price: 699, oldPrice: 999, image: "products/heart-chain.jpg" },
+  { id: 6, name: "Crystal Tennis Bracelet", category: "bracelets", price: 1199, oldPrice: 1799, image: "products/tennis.jpg" },
+  { id: 7, name: "Butterfly Charm Bangle", category: "bracelets", price: 999, oldPrice: 1499, image: "products/butterfly-bangle.jpg" },
+  { id: 8, name: "Lotus Diamond Pendant", category: "necklaces", price: 849, oldPrice: 1299, image: "products/lotus.jpg" },
+];
+
+let cart = [];
+let currentRating = 0;
+let currentSlide = 0;
+
+function renderProducts(filter) {
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" data-category="${p.category}">
+      <div class="product-img-wrap">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#2a1f0f,#1a1508);display:flex;align-items:center;justify-content:center;">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <div class="product-overlay">
+          <button class="add-cart-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-category">${p.category}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">&#8377;${p.price} <span>&#8377;${p.oldPrice}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(category) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderProducts(category);
+}
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(c => c.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+  updateCart();
+  showToast(product.name + ' added to cart');
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  updateCart();
+}
+
+function updateCart() {
+  const count = cart.reduce((sum, c) => sum + c.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  const itemsContainer = document.getElementById('cartItems');
+  const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+  document.getElementById('cartTotal').textContent = '&#8377;' + total;
+  document.getElementById('checkoutBtn').disabled = cart.length === 0;
+
+  if (cart.length === 0) {
+    itemsContainer.innerHTML = `
+      <div class="cart-empty">
+        <svg viewBox="0 0 24 24" width="60" height="60" stroke="#C9A84C" fill="none" stroke-width="1" style="opacity:0.3;margin-bottom:16px;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <p>Your cart is empty</p>
+        <p style="font-size:12px;color:var(--gray);margin-top:8px;">Add some sparkle to your life</p>
+      </div>`;
+  } else {
+    itemsContainer.innerHTML = cart.map(c => `
+      <div class="cart-item">
+        <div style="width:70px;height:70px;border-radius:6px;background:linear-gradient(135deg,#2a1f0f,#1a1508);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${c.name}</div>
+          <div class="cart-item-price">&#8377;${c.price} x ${c.qty}</div>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${c.id})">&times;</button>
+      </div>
+    `).join('');
+  }
+}
+
+function toggleCart() {
+  document.getElementById('cartOverlay').classList.toggle('open');
+  document.getElementById('cartSidebar').classList.toggle('open');
+}
+
+function openPayment() {
+  toggleCart();
+  document.getElementById('paymentModal').classList.add('open');
+}
+
+function closePayment() {
+  document.getElementById('paymentModal').classList.remove('open');
+}
+
+function selectPayment(el) {
+  document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function processPayment() {
+  closePayment();
+  showToast('Order placed successfully! Thank you for shopping with AURYX.');
+  cart = [];
+  updateCart();
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function setRating(rating) {
+  currentRating = rating;
+  const stars = document.querySelectorAll('#starRating svg');
+  stars.forEach((star, i) => {
+    if (i < rating) star.classList.add('filled');
+    else star.classList.remove('filled');
+  });
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  document.getElementById('testimonialsTrack').style.transform = 'translateX(-' + (index * 100) + '%)';
+  document.querySelectorAll('.slider-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+}
+
+function startTryOn() {
+  showToast('Camera access requested. Virtual try-on coming soon!');
+}
+
+function uploadCustomerPhoto() {
+  showToast('Photo upload feature coming soon!');
+}
+
+function submitFeedback(e) {
+  e.preventDefault();
+  if (currentRating === 0) {
+    showToast('Please select a star rating');
+    return;
+  }
+  showToast('Thank you for your feedback!');
+  e.target.reset();
+  currentRating = 0;
+  document.querySelectorAll('#starRating svg').forEach(s => s.classList.remove('filled'));
+}
+
+function submitContact(e) {
+  e.preventDefault();
+  showToast('Message sent! We will get back to you soon.');
+  e.target.reset();
+}
+
+function toggleMobileMenu() {
+  showToast('Mobile menu - use nav links to browse');
+}
+
+// Auto-slide testimonials
+setInterval(() => {
+  currentSlide = (currentSlide + 1) % 3;
+  goToSlide(currentSlide);
+}, 5000);
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(section => {
+  section.classList.add('fade-in');
+  observer.observe(section);
+});
+
+// Initialize
+renderProducts('all');
+</script>
+</body>
+</html>

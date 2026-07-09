@@ -445,6 +445,7 @@
   .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -846,7 +847,8 @@ function renderProducts(filter) {
   grid.innerHTML = filtered.map(p => `
     <div class="product-card" data-category="${p.category}">
       <div class="product-img-wrap">
-        <div style="width:100%;height:100%;background:linear-gradient(135deg,#2a1f0f,#1a1508);display:flex;align-items:center;justify-content:center;">
+        <img src="${p.image}" alt="${p.name}" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#2a1f0f,#1a1508);display:none;align-items:center;justify-content:center;position:absolute;top:0;left:0;">
           <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
           </svg>
@@ -905,7 +907,8 @@ function updateCart() {
   } else {
     itemsContainer.innerHTML = cart.map(c => `
       <div class="cart-item">
-        <div style="width:70px;height:70px;border-radius:6px;background:linear-gradient(135deg,#2a1f0f,#1a1508);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <img src="${c.image}" class="cart-item-img" alt="${c.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="width:70px;height:70px;border-radius:6px;background:linear-gradient(135deg,#2a1f0f,#1a1508);display:none;align-items:center;justify-content:center;flex-shrink:0;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
         <div class="cart-item-info">
